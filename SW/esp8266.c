@@ -27,11 +27,16 @@
 #include "inc/UART.h"
 #include "inc/ST7735.h"
 #include "esp8266.h"
-// the following two lines connect you to the internet
-char    ssid[32]        = "EE-IOT-Platform-03";
-char    pass[32]        = "g!TyA>hR2JTy";
+// the following two lines connect you to the internet in the lab
+// char    ssid[32]        = "EE-IOT-Platform-03";
+// char    pass[32]        = "g!TyA>hR2JTy";
+
+// wifi values for home
+char    ssid[32]        = "NETGEAR35";
+char    pass[32]        = "breezyocean757";
+
 // create your own Blynk server app and edit this next line with your authentication code
-char    auth[64]        = "1234567890";
+char    auth[64]        = "PXnDxQ-LdtypS4L-x9vPMj5T85fxvw54";
 
 #define UART_FR_RXFF            0x00000040  // UART Receive FIFO Full
 #define UART_FR_TXFF            0x00000020  // UART Transmit FIFO Full

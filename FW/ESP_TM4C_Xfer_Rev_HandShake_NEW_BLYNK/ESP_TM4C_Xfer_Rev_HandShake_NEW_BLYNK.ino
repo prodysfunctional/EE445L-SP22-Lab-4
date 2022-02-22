@@ -23,9 +23,13 @@
 //#define BLYNK_AUTH_TOKEN "MsWS4ccgoTWizqgnW5pxQm7fNc4vA3ES"
 
 
-#define BLYNK_TEMPLATE_ID "TMPL0hqIUfLL"
-#define BLYNK_DEVICE_NAME "EE445L Lab4D"
-#define BLYNK_AUTH_TOKEN "UcSNXiCuOccQ3A34T1kEw5YYLcCjxgb-";
+//#define BLYNK_TEMPLATE_ID "TMPL0hqIUfLL"
+//#define BLYNK_DEVICE_NAME "EE445L Lab4D"
+//#define BLYNK_AUTH_TOKEN "UcSNXiCuOccQ3A34T1kEw5YYLcCjxgb-";
+
+#define BLYNK_TEMPLATE_ID "TMPLLEiU8qjl"
+#define BLYNK_DEVICE_NAME "EE445L LAB 4"
+#define BLYNK_AUTH_TOKEN "PXnDxQ-LdtypS4L-x9vPMj5T85fxvw54"
 
 // ----------------------------------------------------------------------------
 // DEFINEs section
@@ -474,4 +478,3 @@ void Test8266_IF(void) {
   digitalWrite(RDY, LOW);            // Negate RDY to TM4C
   
 }  // END of Test8266
-
