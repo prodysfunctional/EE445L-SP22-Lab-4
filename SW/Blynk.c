@@ -45,6 +45,7 @@
 #include "inc/UART.h"
 #include "inc/PortF.h"
 #include "esp8266.h"
+#include "inc/ADCSWTrigger.h"
 
 /* Dump and jitter */
 #include "inc/Dump.h"
@@ -58,6 +59,7 @@ void WaitForInterrupt(void);    // Defined in startup.s
 
 uint32_t LED;      // VP1
 uint32_t LastF;    // VP74
+uint32_t LastADC;  // VP75
 // These 6 variables contain the most recent Blynk to TM4C123 message
 // Blynk to TM4C123 uses VP0 to VP15
 char serial_buf[64];
@@ -138,15 +140,29 @@ void SendInformation(void){
   thisF = PortF_Input();
 // your account will be temporarily halted if you send too much data
   if(thisF != LastF){
-    TM4C_to_Blynk(76, thisF);  // VP76
+    TM4C_to_Blynk(74, thisF);  // VP74
 #ifdef DEBUG3
     Output_Color(ST7735_WHITE);
-    ST7735_OutString("Send 76 data=");
+    ST7735_OutString("Send 74 data=");
     ST7735_OutUDec(thisF);
     ST7735_OutChar('\n');
 #endif
   }
   LastF = thisF;
+	
+	uint32_t thisADC;
+	thisADC = ADC0_InSeq3();
+	if (thisADC != LastADC){
+		TM4C_to_Blynk(75, thisADC);  // VP75
+	}
+#ifdef DEBUG3
+    Output_Color(ST7735_WHITE);
+    ST7735_OutString("Send 75 data=");
+    ST7735_OutUDec(thisADC);
+    ST7735_OutChar('\n');
+#endif
+	
+	LastADC = thisADC;
 	
 	++realTimeCount;
   JitterMeasure();
@@ -175,6 +191,8 @@ int main(void){
 	JitterInit();
 	DumpInit();
   
+	ADC0_InitSWTriggerSeq3(4);
+	
   Timer2A_Init(&Blynk_to_TM4C,800000,4); 
   // check for receive data from Blynk App every 10ms
 
