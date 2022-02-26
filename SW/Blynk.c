@@ -46,6 +46,12 @@
 #include "inc/PortF.h"
 #include "esp8266.h"
 
+/* Dump and jitter */
+#include "inc/Dump.h"
+
+// variable used by dump.c 
+volatile uint32_t realTimeCount;
+
 void EnableInterrupts(void);    // Defined in startup.s
 void DisableInterrupts(void);   // Defined in startup.s
 void WaitForInterrupt(void);    // Defined in startup.s
@@ -132,16 +138,21 @@ void SendInformation(void){
   thisF = PortF_Input();
 // your account will be temporarily halted if you send too much data
   if(thisF != LastF){
-    TM4C_to_Blynk(74, thisF);  // VP74
+    TM4C_to_Blynk(76, thisF);  // VP76
 #ifdef DEBUG3
     Output_Color(ST7735_WHITE);
-    ST7735_OutString("Send 74 data=");
+    ST7735_OutString("Send 76 data=");
     ST7735_OutUDec(thisF);
     ST7735_OutChar('\n');
 #endif
   }
   LastF = thisF;
+	
+	++realTimeCount;
+  JitterMeasure();
+	DumpCapture(thisF);
 }
+
 
   
 int main(void){       
@@ -160,6 +171,9 @@ int main(void){
   ESP8266_Init();       // Enable ESP8266 Serial Port
   ESP8266_Reset();      // Reset the WiFi module
   ESP8266_SetupWiFi();  // Setup communications to Blynk Server  
+	
+	JitterInit();
+	DumpInit();
   
   Timer2A_Init(&Blynk_to_TM4C,800000,4); 
   // check for receive data from Blynk App every 10ms

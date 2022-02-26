@@ -468,6 +468,11 @@
               <FileType>1</FileType>
               <FilePath>.\inc\PortF.c</FilePath>
             </File>
+            <File>
+              <FileName>Dump.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\inc\Dump.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

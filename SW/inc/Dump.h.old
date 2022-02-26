@@ -1,8 +1,7 @@
 /**
  * @file Dump.h
- * @author Alex VanScoy (vanscoy@utexas.edu), Jonathan Valvano, Matthew Yu
- * @TA Kyubum (Kevin) Shim
- * @section 17510
+ * @author your name (you@domain.com), Jonathan Valvano, Matthew Yu
+ *    <TA NAME and LAB SECTION # HERE>
  * @brief 
  *    A set of debugging functions that capture data for later inspection.
  *    There are two primary methods:
